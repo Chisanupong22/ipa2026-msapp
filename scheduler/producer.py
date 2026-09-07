@@ -23,7 +23,5 @@ def produce(host, body):
     if isinstance(body, (dict, list)):
         body = json.dumps(body)
 
-    channel.basic_publish(
-        exchange="jobs", routing_key="check_interfaces", body=body
-    )
+    channel.basic_publish(exchange="jobs", routing_key="check_interfaces", body=body)
     connection.close()

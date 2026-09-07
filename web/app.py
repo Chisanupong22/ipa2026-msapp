@@ -26,9 +26,7 @@ def add_router():
     password = request.form.get("password")
 
     if ip and username and password:
-        routers_col.insert_one(
-            {"ip": ip, "username": username, "password": password}
-        )
+        routers_col.insert_one({"ip": ip, "username": username, "password": password})
     return redirect(url_for("index"))
 
 
@@ -44,13 +42,9 @@ def delete_comment():
 
 @app.route("/router/<ip>")
 def router_detail(ip):
-    status_records = list(
-        status_col.find({"ip": ip}).sort("timestamp", -1).limit(3)
-    )
+    status_records = list(status_col.find({"ip": ip}).sort("timestamp", -1).limit(3))
 
-    return render_template(
-        "router_detail.html", ip=ip, status_records=status_records
-    )
+    return render_template("router_detail.html", ip=ip, status_records=status_records)
 
 
 if __name__ == "__main__":
