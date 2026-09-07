@@ -4,7 +4,9 @@ from pymongo import MongoClient
 
 app = Flask(__name__)
 
-MONGO_URI = os.environ.get("MONGO_URI", "mongodb://admin:{3gM1{F#~|]5@mongo:27017/?authSource=admin").strip("'\" ")
+MONGO_URI = os.environ.get(
+    "MONGO_URI", "mongodb://admin:{3gM1{F#~|]5@mongo:27017/?authSource=admin"
+).strip("'\" ")
 DB_NAME = os.environ.get("DB_NAME", "ipa2026_db")
 
 client = MongoClient(MONGO_URI)
@@ -39,6 +41,7 @@ def delete_comment():
         routers_col.delete_one({"_id": target_id})
     return redirect(url_for("index"))
 
+
 @app.route("/router/<ip>")
 def router_detail(ip):
     status_records = list(
@@ -47,6 +50,7 @@ def router_detail(ip):
         .limit(5)
     )
     return render_template("router_detail.html", ip=ip, status_records=status_records)
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080)

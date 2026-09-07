@@ -7,7 +7,9 @@ def save_interface_status(router_ip, interfaces):
 
     MONGO_URI = os.getenv("MONGO_URI")
     DB_NAME = os.getenv("DB_NAME")
-    MONGO_URI = os.getenv("MONGO_URI", "mongodb://admin:{3gM1{F#~|]5@mongo:27017/?authSource=admin")
+    MONGO_URI = os.getenv(
+        "MONGO_URI", "mongodb://admin:{3gM1{F#~|]5@mongo:27017/?authSource=admin"
+    )
     DB_NAME = os.getenv("DB_NAME", "ipa2026_db")
 
     client = MongoClient(MONGO_URI)
