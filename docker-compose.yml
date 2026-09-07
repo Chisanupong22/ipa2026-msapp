@@ -36,7 +36,7 @@ services:
       - app-net
     environment:
       - RABBITMQ_DEFAULT_USER=admin
-      - RABBITMQ_DEFAULT_PASS=rabbitmq
+      - RABBITMQ_DEFAULT_PASS=y90:SU28i{u@
 
   worker:
     build: ./worker
@@ -47,8 +47,8 @@ services:
       - PYTHONUNBUFFERED=1
       - RABBITMQ_HOST=rabbitmq
       - RABBITMQ_USER=admin
-      - RABBITMQ_PASS=rabbitmq
-      - MONGO_URI=mongodb://admin:mongo@mongo:27017/
+      - RABBITMQ_PASS=y90:SU28i{u@
+      - MONGO_URI=mongodb://admin:{3gM1{F#~|]5@mongo:27017/?authSource=admin
       - DB_NAME=ipa2026_db
     depends_on:
       - rabbitmq
@@ -63,9 +63,10 @@ services:
       - PYTHONUNBUFFERED=1
       - RABBITMQ_HOST=rabbitmq
       - RABBITMQ_USER=admin
-      - RABBITMQ_PASS=rabbitmq
-      - MONGO_URI=mongodb://admin:mongo@mongo:27017/
+      - RABBITMQ_PASS=y90:SU28i{u@
+      - MONGO_URI=mongodb://admin:{3gM1{F#~|]5@mongo:27017/?authSource=admin
       - DB_NAME=ipa2026_db
+      - INTERVAL=30
     depends_on:
       - rabbitmq
       - mongo

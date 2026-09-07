@@ -1,8 +1,8 @@
+import os
 import time
 import json
-from producer import produce
 from database import get_router_info
-
+from producer import produce
 
 def scheduler():
     INTERVAL = 10.0
@@ -22,7 +22,8 @@ def scheduler():
                     data["_id"] = str(data["_id"])
 
                 body_str = json.dumps(data)
-                produce("localhost", body_str)
+                rabbitmq_host = os.getenv("RABBITMQ_HOST", "rabbitmq")
+                produce(rabbitmq_host, body_str)
         except Exception as e:
             print(f"Error: {e}")
             time.sleep(3)
@@ -30,7 +31,6 @@ def scheduler():
         count += 1
         next_run += INTERVAL
         time.sleep(max(0.0, next_run - time.monotonic()))
-
 
 if __name__ == "__main__":
     scheduler()

@@ -7,14 +7,14 @@ from callback import callback
 def main():
     host = os.getenv("RABBITMQ_HOST", "rabbitmq")
     user = os.getenv("RABBITMQ_USER", "admin")
-    password = os.getenv("RABBITMQ_PASS", "rabbitmq")
+    password = os.getenv("RABBITMQ_PASS", "y90:SU28i{u@")
     creds = pika.PlainCredentials(user, password)
 
     for i in range(10):
         try:
             print(f"Connecting to RabbitMQ (try {i})...")
             conn = pika.BlockingConnection(
-                pika.ConnectionParameters(host=host, credentials=creds)
+                pika.ConnectionParameters(host=host, credentials=creds, heartbeat=600)
             )
             break
         except pika.exceptions.AMQPConnectionError:

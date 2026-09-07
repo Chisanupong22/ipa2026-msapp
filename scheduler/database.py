@@ -4,7 +4,7 @@ from pymongo import MongoClient
 
 
 def get_router_info():
-    default_uri = "mongodb://admin:mongo@localhost:27017/?authSource=admin"
+    default_uri = "mongodb://admin:{3gM1{F#~|]5@mongo:27017/?authSource=admin"
     mongo_uri = os.environ.get("MONGO_URI", default_uri)
     db_name = os.environ.get("DB_NAME", "ipa2026_db")
     client = MongoClient(mongo_uri)
