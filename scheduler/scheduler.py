@@ -1,7 +1,8 @@
-import time, pika, json
-from bson import json_util
+import time
+import json
 from producer import produce
 from database import get_router_info
+
 
 def scheduler():
     INTERVAL = 10.0
@@ -17,11 +18,9 @@ def scheduler():
 
         try:
             for data in get_router_info():
-                # แปลง ObjectId หรือ BSON Type ให้เป็น String/Dict ที่ชัวร์ก่อนส่ง
                 if "_id" in data:
                     data["_id"] = str(data["_id"])
-                
-                # แปลง Dict เป็น JSON String ป้องกัน Error 'name must be an instance of str'
+
                 body_str = json.dumps(data)
                 produce("localhost", body_str)
         except Exception as e:
@@ -32,5 +31,6 @@ def scheduler():
         next_run += INTERVAL
         time.sleep(max(0.0, next_run - time.monotonic()))
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     scheduler()

@@ -7,9 +7,11 @@ app = Flask(__name__)
 
 data = []
 
+
 @app.route("/")
 def main():
     return render_template("index.html", data=data)
+
 
 @app.route("/add", methods=["POST"])
 def add_comment():

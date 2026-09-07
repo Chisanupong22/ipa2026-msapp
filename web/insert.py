@@ -10,7 +10,7 @@ datalist = [
     {"name": "Alice", "address": "Highway 27"},
     {"name": "Bob", "address": "Highway 17"},
     {"name": "Carl", "address": "Highway 27"},
-    {"name": "Dave", "address": "Highway 7"}
+    {"name": "Dave", "address": "Highway 7"},
 ]
 
 mycol.insert_many(datalist)
