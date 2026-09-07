@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Router Detail</title>
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+    <h1>Router: {{ ip }}</h1>
+
+    <table border="1" cellpadding="5" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Timestamp</th>
+                <th>Interface</th>
+                <th>IP Address</th>
+                <th>Status</th>
+                <th>Protocol</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in status_records %}
+                {% for iface in record.interfaces %}
+                <tr>
+                    <td>{{ record.timestamp }}</td>
+                    <td>{{ iface.interface }}</td>
+                    <td>{{ iface.ip_address }}</td>
+                    <td>{{ iface.status }}</td>
+                    <td>{{ iface.proto }}</td>
+                </tr>
+                {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <a href="/">Back to Home</a>
+</body>
+</html>

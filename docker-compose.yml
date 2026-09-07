@@ -1,0 +1,78 @@
+version: '3.8'
+
+services:
+  web:
+    build: ./web
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongo
+    networks:
+      - app-net
+    env_file:
+      - .env
+    environment:
+      - MONGO_URI=mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongo:27017/
+      - DB_NAME=ipa2026_db
+
+  mongo:
+    image: mongo:6
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - app-net
+    env_file:
+      - .env
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - app-net
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=rabbitmq
+
+  worker:
+    build: ./worker
+    #container_name: worker
+    networks:
+      - app-net
+    environment:
+      - PYTHONUNBUFFERED=1
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_USER=admin
+      - RABBITMQ_PASS=rabbitmq
+      - MONGO_URI=mongodb://admin:mongo@mongo:27017/
+      - DB_NAME=ipa2026_db
+    depends_on:
+      - rabbitmq
+      - mongo
+
+  scheduler:
+    build: ./scheduler
+    container_name: scheduler
+    networks:
+      - app-net
+    environment:
+      - PYTHONUNBUFFERED=1
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_USER=admin
+      - RABBITMQ_PASS=rabbitmq
+      - MONGO_URI=mongodb://admin:mongo@mongo:27017/
+      - DB_NAME=ipa2026_db
+    depends_on:
+      - rabbitmq
+      - mongo
+
+volumes:
+  mongo-data:
+
+networks:
+  app-net:
+    driver: bridge
