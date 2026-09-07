@@ -40,10 +40,10 @@ jobs:
 
     - name: Build & Push Docker Images
       run: |
-        docker build -t chisanupong/worker:latest ./worker
-        docker build -t chisanupong/scheduler:latest ./scheduler
-        docker build -t chisanupong/web:latest ./web
+        docker build -t chisanupong220/worker:latest ./worker
+        docker build -t chisanupong220/scheduler:latest ./scheduler
+        docker build -t chisanupong220/web:latest ./web
 
-        docker push chisanupong/worker:latest
-        docker push chisanupong/scheduler:latest
-        docker push chisanupong/web:latest
+        docker push chisanupong220/worker:latest
+        docker push chisanupong220/scheduler:latest
+        docker push chisanupong220/web:latest
